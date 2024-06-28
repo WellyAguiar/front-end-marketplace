@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .message {
+    font-size: 2rem;
+    color: #333;
+    margin: 1rem;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .canceled {
+    color: red;
+  }
+  

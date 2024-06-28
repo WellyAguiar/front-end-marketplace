@@ -1,0 +1,57 @@
+:root {
+  --color-primary: #e4bbf8;
+  --color-secondary: #2c258a;
+  --color-tertiary: #e74c3c;
+  --color-text-primary: #333333;
+  --color-text-secondary: #777777;
+  --color-background: #f8f9fa;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+input, textarea, button {
+  font-family: inherit;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-secondary);
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}

@@ -1,0 +1,27 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input {
+    margin-bottom: 1rem;
+  }
+  
+  .button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: var(--color-secondary);
+  }
+  
