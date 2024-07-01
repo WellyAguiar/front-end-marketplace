@@ -54,7 +54,7 @@ export default function CreateProduct() {
     });
 
     try {
-      const res = await fetch('/api/products/create', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products/create`, {
         method: 'POST',
         body: formData,
       });

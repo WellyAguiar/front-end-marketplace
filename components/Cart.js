@@ -12,7 +12,7 @@ export default function Cart({ isOpen, toggleCart }) {
     const stripe = await stripePromise;
 
     try {
-      const response = await axios.post('/api/create-checkout-session', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND}/src/create-checkout-session`, {
         cartItems,
       });
 

@@ -4,12 +4,21 @@ import styles from '../styles/Products.module.css';
 
 export default function Womens() {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch('/api/products?categories=mulher,unissex');
-      const data = await res.json();
-      setProducts(Array.isArray(data) ? data : []);
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?categories=mulher,unissex`);
+        if (!res.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await res.json();
+        setProducts(Array.isArray(data) ? data : []);
+      } catch (error) {
+        setError(error.message);
+        console.error('Error fetching products:', error);
+      }
     };
 
     fetchProducts();
@@ -18,6 +27,7 @@ export default function Womens() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Femininas</h1>
+      {error && <p className={styles.error}>{error}</p>}
       <div className={styles.grid}>
         {products.map((product) => (
           <Link href={`/products/${product.id}`} key={product.id} legacyBehavior>

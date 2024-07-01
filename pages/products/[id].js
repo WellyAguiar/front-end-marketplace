@@ -13,7 +13,7 @@ export default function Product() {
     if (id) {
       const fetchProduct = async () => {
         try {
-          const res = await fetch(`/api/products?id=${id}`);
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?id=${id}`);
           if (!res.ok) {
             throw new Error('Failed to fetch product');
           }

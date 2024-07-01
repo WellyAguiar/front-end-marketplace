@@ -7,7 +7,7 @@ export default function Launch() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch('/api/products?category=new');
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?category=new`);
       const data = await res.json();
       setProducts(Array.isArray(data) ? data : []);
     };

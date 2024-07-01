@@ -1,24 +1,31 @@
-// components/Support.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styles from '../styles/Support.module.css';
 
 export default function Support() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [sessionId, setSessionId] = useState('');
+
+  useEffect(() => {
+    // Generate a unique session ID when the component mounts
+    setSessionId(uuidv4());
+  }, []);
 
   const handleSend = async () => {
     if (input.trim() === '') return;
 
     const userMessage = { sender: 'user', text: input };
-    setMessages([...messages, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
 
     try {
-      const response = await fetch('/api/gemini', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/api/gemini`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input, sessionId }),
       });
 
       if (!response.ok) {
@@ -27,7 +34,7 @@ export default function Support() {
 
       const data = await response.json();
       const botMessage = { sender: 'bot', text: data.reply };
-      setMessages([...messages, userMessage, botMessage]);
+      setMessages([...updatedMessages, botMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
     }

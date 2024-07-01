@@ -7,7 +7,7 @@ export default function Mens() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch('/api/products?categories=homem,unissex');
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?categories=homem,unissex`);
       const data = await res.json();
       setProducts(Array.isArray(data) ? data : []);
     };
