@@ -36,7 +36,6 @@ export default function Product() {
     addToCart(product);
   };
 
-  // Ensure quantities is defined and is an array
   const quantities = product.quantities || [];
   const totalQuantity = quantities.reduce((total, item) => total + item.quantity, 0);
 
