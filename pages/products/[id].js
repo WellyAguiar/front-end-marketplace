@@ -41,9 +41,6 @@ export default function Product() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <img src={product.imageUrl} alt={product.name} className={styles.image} />
-      </div>
       <div className={styles.details}>
         <h1>{product.name}</h1>
         <p><strong>Price:</strong> R$ {product.price},00</p>

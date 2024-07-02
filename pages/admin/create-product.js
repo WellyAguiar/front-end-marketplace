@@ -10,7 +10,6 @@ export default function CreateProduct() {
   const [quantity, setQuantity] = useState({});
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
-  const [image, setImage] = useState(null);
 
   const handleNext = () => {
     setStep(step + 1);
@@ -18,10 +17,6 @@ export default function CreateProduct() {
 
   const handlePrev = () => {
     setStep(step - 1);
-  };
-
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
   };
 
   const handleQuantityChange = (size, color, value) => {
@@ -34,29 +29,28 @@ export default function CreateProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !description || !price || !category || !size || !color || !image) {
+    if (!name || !description || !price || !category || !size || !color) {
       alert("Please fill in all required fields");
       return;
     }
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('category', category);
-    formData.append('size', size);
-    formData.append('color', color);
-    formData.append('image', image);
-    formData.append('quantity', JSON.stringify(quantity));
-
-    console.log('Submitting form with data:', {
-      name, description, price, category, size, color, image, quantity
-    });
+    const productData = {
+      name,
+      description,
+      price,
+      category,
+      size,
+      color,
+      quantity: JSON.stringify(quantity),
+    };
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products/create`, {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
       });
 
       if (!res.ok) {
@@ -174,14 +168,6 @@ export default function CreateProduct() {
       )}
       {step === 7 && (
         <>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleImageChange}
-            required
-            className={styles.input}
-          />
           <button type="button" onClick={handlePrev} className={styles.button}>Back</button>
           <button type="submit" className={styles.button}>Submit</button>
         </>
