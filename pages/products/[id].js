@@ -1,6 +1,8 @@
+// [id].js
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import { storage, ref, getDownloadURL } from '../../firebaseConfig';
 import styles from '../../styles/Product.module.css';
 
 export default function Product() {
@@ -18,6 +20,14 @@ export default function Product() {
             throw new Error('Failed to fetch product');
           }
           const data = await res.json();
+
+          // Fetch image URL from Firebase Storage
+          if (data.imagePath) {
+            const imageRef = ref(storage, data.imagePath);
+            const imageUrl = await getDownloadURL(imageRef);
+            data.imageUrl = imageUrl; // Adiciona a URL da imagem ao objeto produto
+          }
+
           setProduct(data);
         } catch (error) {
           console.error('Error fetching product:', error);
@@ -43,6 +53,7 @@ export default function Product() {
     <div className={styles.container}>
       <div className={styles.details}>
         <h1>{product.name}</h1>
+        {product.imageUrl && <img src={product.imageUrl} alt={product.name} className={styles.image} />}
         <p><strong>Price:</strong> R$ {product.price},00</p>
         <p><strong>Quantidade Disponível:</strong> {totalQuantity}</p>
         <p><strong>Tamanho:</strong> {product.size}</p>

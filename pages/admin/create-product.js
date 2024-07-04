@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/CreateProduct.module.css';
 
 export default function CreateProduct() {
@@ -10,6 +10,7 @@ export default function CreateProduct() {
   const [quantity, setQuantity] = useState({});
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
+  const [image, setImage] = useState(null);
 
   const handleNext = () => {
     setStep(step + 1);
@@ -29,28 +30,29 @@ export default function CreateProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !description || !price || !category || !size || !color) {
+    if (!name || !description || !price || !category || !size || !color || !image) {
       alert("Please fill in all required fields");
       return;
     }
 
-    const productData = {
-      name,
-      description,
-      price,
-      category,
-      size,
-      color,
-      quantity: JSON.stringify(quantity),
-    };
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('size', size);
+    formData.append('color', color);
+    formData.append('quantity', JSON.stringify(quantity));
+    formData.append('image', image);
+
+    console.log('Submitting form with:', {
+      name, description, price, category, size, color, quantity, image
+    });
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products/create`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
+        body: formData,
       });
 
       if (!res.ok) {
@@ -168,6 +170,14 @@ export default function CreateProduct() {
       )}
       {step === 7 && (
         <>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={(e) => setImage(e.target.files[0])}
+            required
+            className={styles.input}
+          />
           <button type="button" onClick={handlePrev} className={styles.button}>Back</button>
           <button type="submit" className={styles.button}>Submit</button>
         </>
