@@ -4,16 +4,28 @@ import styles from '../styles/Products.module.css';
 
 export default function Mens() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?categories=homem,unissex`);
-      const data = await res.json();
-      setProducts(Array.isArray(data) ? data : []);
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/src/products?categories=homem,unissex`);
+        if (!res.ok) throw new Error('Failed to fetch products');
+        const data = await res.json();
+        setProducts(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchProducts();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className={styles.container}>
