@@ -1,11 +1,13 @@
-/* styles/Products.module.css */
 .container {
   padding: 2rem;
+  background: var(--color-background);
 }
 
 .title {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--color-primary);
+  font-family: 'Poppins', sans-serif;
 }
 
 .grid {
@@ -18,16 +20,23 @@
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
 }
 
 .card h2 {
   margin-top: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .image {
   max-width: 100%;
   height: auto;
   margin-bottom: 1rem;
+  border-radius: 8px;
 }

@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #b64aeb;
+  --color-primary: #6c63ff; /* Cor moderna */
   --color-secondary: #2c258a;
   --color-tertiary: #e74c3c;
   --color-text-primary: #333333;
@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   margin: 0;
@@ -17,6 +17,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary);
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -25,7 +26,7 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 input, textarea, button {

@@ -4,7 +4,7 @@
   padding: 2rem;
   background: var(--color-background);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   gap: 2rem;
 }
 
@@ -18,11 +18,11 @@
 
 .image {
   width: 100%;
-  max-width: 500px; /* Ajusta o tamanho máximo */
-  aspect-ratio: 1; /* Mantém a imagem quadrada */
-  object-fit: cover; /* Ajusta a imagem para cobrir o espaço, mantendo a proporção */
+  max-width: 500px;
+  aspect-ratio: 1;
+  object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .details {
@@ -34,10 +34,12 @@
 .details h1 {
   margin-top: 0;
   color: var(--color-primary);
+  font-family: 'Poppins', sans-serif;
 }
 
 .details p {
   margin: 0.5rem 0;
+  line-height: 1.6;
 }
 
 .details strong {
@@ -78,7 +80,6 @@
   background-color: var(--color-secondary);
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -87,8 +88,8 @@
 
   .image {
     width: 100%;
-    max-width: none; /* Remove o tamanho máximo em telas menores */
-    height: auto; /* Permite que a altura se ajuste conforme necessário */
+    max-width: none;
+    height: auto;
   }
 
   .details {
