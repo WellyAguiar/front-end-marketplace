@@ -24,12 +24,12 @@ export default function Mens() {
     fetchProducts();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Carregando produtos...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Men's Clothing</h1>
+      <h1 className={styles.title}>Roupas Masculinas</h1>
       <div className={styles.grid}>
         {products.map((product) => (
           <Link href={`/products/${product.id}`} key={product.id} legacyBehavior>
